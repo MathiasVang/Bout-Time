@@ -22,6 +22,20 @@ class ViewController: UIViewController {
     var buttonOneRoundNumber = 0
     var buttonTwoRoundNumber = 6
     var buttonThirdRoundNumber = 12
+    
+    var activateMotion: Bool = true
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        if motion == .motionShake {
+            if activateMotion == true {
+                checkAnswer()
+            }
+        }
+    }
 
     
     @IBOutlet weak var firstEventBtn: UIButton!
@@ -34,8 +48,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var halfUpBtnSecond: UIButton!
     @IBOutlet weak var halfDownBtnFirst: UIButton!
     @IBOutlet weak var halfDownBtnSecond: UIButton!
+    @IBOutlet weak var playAgainBtn: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var textField: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +69,8 @@ class ViewController: UIViewController {
     
     
     func populateEventsWithCurrentRound() {
+        playAgainBtn.isHidden = true
+        textField.isHidden = true
         
         event1Int = roundInstance.roundNumber
         event2Int = roundInstance.roundNumber + numberOfRounds
@@ -70,15 +88,22 @@ class ViewController: UIViewController {
         fourthEventBtn.setTitle(event4text, for: .normal)
     }
 
-    func checkAnswer() {
+    // Check if the first answer is highest number
+    // Not sure if UIButton is correct. Will it check answer if I press up and down?
+    @IBAction func checkAnswer() {
         roundsCompleted += 1
+        
+        // MARK: Shake Functions
+        
+        // If firstBtn Int is higher than secondBtn Int etc..... Game is correct else false
+        
+        // If up and down buttons are changed, the event(number)text need to change.
+        
     }
     
     func checkRound() {
         if roundsCompleted == numberOfRounds {
             // Game is over
-            
-            //FIXME: Make this function
             displayScore()
         }
     }
@@ -86,11 +111,14 @@ class ViewController: UIViewController {
     func displayScore() {
         hideAllButtons()
         
-        // Display play again button
-        playAgainButton.hidden = false
+        // Display play again button and text field
+        playAgainBtn.isHidden = false
+        textField.isHidden = false
         
-        questionField.text = "Way to go!\nYou got \(correctRounds) out of \(numberOfRounds) correct!"
+        textField.text = "Way to go!\nYou got \(correctRounds) out of \(numberOfRounds) correct!"
     }
+    
+    // Helper methods
     
     func hideAllButtons() {
         firstEventBtn.isHidden = true
@@ -105,9 +133,24 @@ class ViewController: UIViewController {
         halfDownBtnSecond.isHidden = true
         timerLabel.isHidden = true
         descriptionLabel.isHidden = true
+        playAgainBtn.isHidden = true
+        textField.isHidden = true
     }
     
-    // Helper Methods
+    func disableButtons() {
+        firstEventBtn.isEnabled = false
+        secondEventBtn.isEnabled = false
+        thirdEventBtn.isEnabled = false
+        fourthEventBtn.isEnabled = false
+    }
+    
+    func resetButtons() {
+        firstEventBtn.isEnabled = true
+        secondEventBtn.isEnabled = true
+        thirdEventBtn.isEnabled = true
+        fourthEventBtn.isEnabled = true
+    }
+    
     func buttonDesign() {
         firstEventBtn.layer.cornerRadius = 5
         secondEventBtn.layer.cornerRadius = 5

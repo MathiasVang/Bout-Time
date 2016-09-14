@@ -10,7 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let roundInstance = Round()
+    var event1Int: Int = 0
+    var event2Int: Int = 0
+    var event3Int: Int = 0
+    var event4Int: Int = 0
+    
     var roundsCompleted = 0
+    var correctRounds = 0
+    
+    var buttonOneRoundNumber = 0
+    var buttonTwoRoundNumber = 6
+    var buttonThirdRoundNumber = 12
 
     
     @IBOutlet weak var firstEventBtn: UIButton!
@@ -29,15 +40,72 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        roundInstance.setupRound()
+        populateEventsWithCurrentRound()
         buttonDesign()
+        startClock()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    func populateEventsWithCurrentRound() {
+        
+        event1Int = roundInstance.roundNumber
+        event2Int = roundInstance.roundNumber + numberOfRounds
+        event3Int = roundInstance.roundNumber + numberOfRounds * 2 - 1
+        event4Int = roundInstance.roundNumber + numberOfRounds * 3
+        
+        let event1text = arrayOfRandomEvents[event1Int].eventDescription
+        let event2text = arrayOfRandomEvents[event2Int].eventDescription
+        let event3text = arrayOfRandomEvents[event3Int].eventDescription
+        let event4text = arrayOfRandomEvents[event4Int].eventDescription
+        
+        firstEventBtn.setTitle(event1text, for: .normal)
+        secondEventBtn.setTitle(event2text, for: .normal)
+        thirdEventBtn.setTitle(event3text, for: .normal)
+        fourthEventBtn.setTitle(event4text, for: .normal)
+    }
 
-
+    func checkAnswer() {
+        roundsCompleted += 1
+    }
+    
+    func checkRound() {
+        if roundsCompleted == numberOfRounds {
+            // Game is over
+            
+            //FIXME: Make this function
+            displayScore()
+        }
+    }
+    
+    func displayScore() {
+        hideAllButtons()
+        
+        // Display play again button
+        playAgainButton.hidden = false
+        
+        questionField.text = "Way to go!\nYou got \(correctRounds) out of \(numberOfRounds) correct!"
+    }
+    
+    func hideAllButtons() {
+        firstEventBtn.isHidden = true
+        secondEventBtn.isHidden = true
+        thirdEventBtn.isHidden = true
+        fourthEventBtn.isHidden = true
+        fullUpBtn.isHidden = true
+        fullDownBtn.isHidden = true
+        halfUpBtnFirst.isHidden = true
+        halfUpBtnSecond.isHidden = true
+        halfDownBtnFirst.isHidden = true
+        halfDownBtnSecond.isHidden = true
+        timerLabel.isHidden = true
+        descriptionLabel.isHidden = true
+    }
     
     // Helper Methods
     func buttonDesign() {
@@ -54,7 +122,7 @@ class ViewController: UIViewController {
     
     func startClock() {
         timerLabel.textColor = UIColor(red: 225/225, green: 225/225, blue: 225/225, alpha: 1.0)
-        seconds = 15.0
+        seconds = 60.0
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ViewController.subtractTime), userInfo: nil, repeats: true)
     }
     

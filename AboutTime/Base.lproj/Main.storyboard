@@ -33,6 +33,9 @@
                                 <state key="normal" title="Play Again">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="playAgain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uHM-7v-x0u"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KM9-Yp-mLS">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -47,9 +50,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r8j-iH-Nii">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="First"/>
-                                <connections>
-                                    <action selector="firstEventBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MlT-oo-Vfq"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEp-0h-tOJ">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -68,36 +68,66 @@
                                     <constraint firstAttribute="width" constant="48" id="oWm-eY-Rd7"/>
                                 </constraints>
                                 <state key="normal" image="down_half"/>
+                                <connections>
+                                    <action selector="halfDownBtn1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yc9-3i-W6n"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nn-f4-Tp2">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="91g-2L-FUq"/>
                                 </constraints>
                                 <state key="normal" image="up_half"/>
+                                <connections>
+                                    <action selector="halfUpBtn2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EH7-vw-djh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dA-DG-aSy">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="VoR-1b-6lP"/>
                                 </constraints>
                                 <state key="normal" image="up_full"/>
+                                <connections>
+                                    <action selector="fullUpBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uE1-Zv-erq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kz-pO-FCb">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="dhn-ED-vfw"/>
                                 </constraints>
                                 <state key="normal" image="down_half"/>
+                                <connections>
+                                    <action selector="halfDownBtn2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S9L-P3-0oq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmd-4C-wYX">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="nP1-OY-4ql"/>
                                 </constraints>
                                 <state key="normal" image="up_half"/>
+                                <connections>
+                                    <action selector="halfUpBtn1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hLb-j2-OxM"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lan-TL-I3n">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="tkD-S2-lLq"/>
                                 </constraints>
                                 <state key="normal" image="down_full"/>
+                                <connections>
+                                    <action selector="fullDownBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lPp-d2-CyY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UkV-SN-yli">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="196" id="0sB-cJ-oJH"/>
+                                    <constraint firstAttribute="height" constant="50" id="emp-hG-GPa"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextRound:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S9Z-dC-bAC"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.16470588235294117" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
@@ -126,6 +156,7 @@
                             <constraint firstAttribute="trailing" secondItem="bmd-4C-wYX" secondAttribute="trailing" constant="10" id="YD7-tC-82P"/>
                             <constraint firstItem="BhF-Bx-Bk0" firstAttribute="height" secondItem="r8j-iH-Nii" secondAttribute="height" id="YZF-Qy-aPa"/>
                             <constraint firstItem="BhF-Bx-Bk0" firstAttribute="top" secondItem="YEp-0h-tOJ" secondAttribute="bottom" constant="10" id="Yz4-5b-oBy"/>
+                            <constraint firstItem="UkV-SN-yli" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZB8-dr-epp"/>
                             <constraint firstItem="r8j-iH-Nii" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="ZFa-g0-5tK"/>
                             <constraint firstItem="KM9-Yp-mLS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZcN-n1-bPo"/>
                             <constraint firstItem="6wH-VV-ccV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dP0-vA-SqQ"/>
@@ -135,6 +166,7 @@
                             <constraint firstAttribute="trailing" secondItem="9kz-pO-FCb" secondAttribute="trailing" constant="10" id="fmG-Ar-gbm"/>
                             <constraint firstItem="bmd-4C-wYX" firstAttribute="top" secondItem="YEp-0h-tOJ" secondAttribute="top" id="g5r-rd-48V"/>
                             <constraint firstItem="Wl1-Ye-DnP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="ggo-H8-CkI"/>
+                            <constraint firstItem="KM9-Yp-mLS" firstAttribute="top" secondItem="UkV-SN-yli" secondAttribute="bottom" constant="20" id="iHs-gs-3Qu"/>
                             <constraint firstItem="YEp-0h-tOJ" firstAttribute="top" secondItem="r8j-iH-Nii" secondAttribute="bottom" constant="10" id="jTg-jq-xUY"/>
                             <constraint firstItem="jNX-6w-RVN" firstAttribute="top" secondItem="6wH-VV-ccV" secondAttribute="bottom" constant="66" id="kpY-Od-GQb"/>
                             <constraint firstItem="oac-Rg-pp3" firstAttribute="top" secondItem="Wl1-Ye-DnP" secondAttribute="bottom" constant="20" id="lQ9-Cn-D92"/>
@@ -159,6 +191,7 @@
                         <outlet property="halfDownBtnSecond" destination="9kz-pO-FCb" id="gLg-aP-YSq"/>
                         <outlet property="halfUpBtnFirst" destination="bmd-4C-wYX" id="RLp-sv-FSR"/>
                         <outlet property="halfUpBtnSecond" destination="4nn-f4-Tp2" id="SDH-nC-y61"/>
+                        <outlet property="nextRound" destination="UkV-SN-yli" id="38k-DJ-4xo"/>
                         <outlet property="playAgainBtn" destination="jNX-6w-RVN" id="BMV-3D-wlX"/>
                         <outlet property="secondEventBtn" destination="YEp-0h-tOJ" id="t3P-6d-ak7"/>
                         <outlet property="textField" destination="6wH-VV-ccV" id="HL6-1H-4zk"/>

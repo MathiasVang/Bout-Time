@@ -60,8 +60,8 @@
 				1F28EA881D8955A100BFF669 /* ViewController.swift */,
 				1F28EA981D8965EC00BFF669 /* EventsModel.swift */,
 				1F28EA8A1D8955A100BFF669 /* Main.storyboard */,
-				1F28EA8D1D8955A100BFF669 /* Assets.xcassets */,
 				1F28EA8F1D8955A100BFF669 /* LaunchScreen.storyboard */,
+				1F28EA8D1D8955A100BFF669 /* Assets.xcassets */,
 				1F28EA921D8955A100BFF669 /* Info.plist */,
 			);
 			path = AboutTime;
@@ -304,6 +304,7 @@
 				1F28EA971D8955A100BFF669 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import SafariServices
 
 class ViewController: UIViewController {
 
+    // Declaring out of scope variables we need
+    
     let roundInstance = Round()
     var event1Int: Int = 0
     var event2Int: Int = 0
@@ -20,6 +23,8 @@ class ViewController: UIViewController {
     
     var activateMotion: Bool = true
     
+    // Implementing 'Shake' function
+    
     override var canBecomeFirstResponder: Bool {
         return true
     }
@@ -29,8 +34,7 @@ class ViewController: UIViewController {
             checkAnswer()
         }
     }
-    
-    
+
     @IBOutlet weak var firstEventBtn: UIButton!
     @IBOutlet weak var secondEventBtn: UIButton!
     @IBOutlet weak var thirdEventBtn: UIButton!
@@ -53,7 +57,6 @@ class ViewController: UIViewController {
         roundInstance.setupRound()
         populateEventsWithCurrentRound()
         buttonDesign()
-        aligningButtonText()
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,16 +64,9 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func aligningButtonText() {
-        firstEventBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
-        secondEventBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
-        thirdEventBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
-        fourthEventBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
-    }
-    
+    // Setting each event round up
     
     func populateEventsWithCurrentRound() {
-        
         
         startClock()
         
@@ -91,17 +87,15 @@ class ViewController: UIViewController {
         halfDownBtnSecond.isHidden = false
         fullUpBtn.isHidden = false
         
+        disableButtons()
+        
         fullDownBtn.isEnabled = true
         halfUpBtnFirst.isEnabled = true
         halfDownBtnFirst.isEnabled = true
         halfUpBtnSecond.isEnabled = true
         halfDownBtnSecond.isEnabled = true
         fullUpBtn.isEnabled = true
-        
-        
-        
-        disableButtons()
-        
+
         descriptionLabel.text = "Shake to complete"
         
         event1Int = roundInstance.roundNumber
@@ -115,7 +109,7 @@ class ViewController: UIViewController {
         fourthEventBtn.setTitle(arrayOfRandomEvents[event4Int].eventDescription, for: .normal)
     }
     
-    // Make logic for buttons
+    // Logic for all the buttons
     
     @IBAction func fullDownBtn(_ sender: AnyObject) {
         
@@ -177,20 +171,40 @@ class ViewController: UIViewController {
         fourthEventBtn.setTitle(arrayOfRandomEvents[event4Int].eventDescription, for: .normal)
     }
     
-    func correctAnswer() {
-        nextRound.setBackgroundImage(#imageLiteral(resourceName: "next_round_success"), for: .normal)
-        correctRounds += 1
+    @IBAction func firstEventBtn(_ sender: AnyObject) {
+        let url = arrayOfRandomEvents[event1Int].eventLink
+        if let url = NSURL(string: url) {
+            let svc = SFSafariViewController(url: url as URL)
+            self.present(svc, animated: true, completion: nil)
+        }
     }
     
-    func wrongAnswer() {
-        nextRound.setBackgroundImage(#imageLiteral(resourceName: "next_round_fail"), for: .normal)
+    @IBAction func secondEventBtn(_ sender: AnyObject) {
+        let url = arrayOfRandomEvents[event2Int].eventLink
+        if let url = NSURL(string: url) {
+            let svc = SFSafariViewController(url: url as URL)
+            self.present(svc, animated: true, completion: nil)
+        }
     }
     
-    //func setColorsFourButtons() {
-      //  firstEventBtn.setTitleColor(<#T##color: UIColor?##UIColor?#>, for: <#T##UIControlState#>)
-    //}
+    @IBAction func thirdEventBtn(_ sender: AnyObject) {
+        let url = arrayOfRandomEvents[event3Int].eventLink
+        if let url = NSURL(string: url) {
+            let svc = SFSafariViewController(url: url as URL)
+            self.present(svc, animated: true, completion: nil)
+        }
+    }
     
-    // Check if the first answer is highest number
+    @IBAction func fourthEventBtn(_ sender: AnyObject) {
+        let url = arrayOfRandomEvents[event4Int].eventLink
+        if let url = NSURL(string: url) {
+            let svc = SFSafariViewController(url: url as URL)
+            self.present(svc, animated: true, completion: nil)
+        }
+    }
+    
+    // Checking the correct answer
+    
     func checkAnswer() {
         
         timer.invalidate()
@@ -221,11 +235,11 @@ class ViewController: UIViewController {
         checkRound()
     }
     
-
     @IBAction func nextRound(_ sender: AnyObject) {
         populateEventsWithCurrentRound()
-        
     }
+    
+    // Checking to see if game should end or proceed with next round
     
     func checkRound() {
         if roundInstance.roundNumber == numberOfRounds {
@@ -249,7 +263,41 @@ class ViewController: UIViewController {
         roundInstance.setupRound()
         populateEventsWithCurrentRound()
     }
+    
+    // Timer function
+    var seconds = 0.0
+    var timer = Timer()
+    
+    func startClock() {
+        timerLabel.textColor = UIColor(red: 225/225, green: 225/225, blue: 225/225, alpha: 1.0)
+        seconds = 60.0
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ViewController.subtractTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc func subtractTime() {
+        seconds -= 0.1
+        timerLabel.text = "Time left: \(String(format: "%.01f", seconds))"
+        
+        if seconds <= 0.0 {
+            timer.invalidate()
+            timerLabel.text = "Time left: 0.0"
+            checkAnswer()
+        } else if seconds < 5 {
+            timerLabel.textColor = UIColor(red: 239/255.0, green: 130/255.0, blue: 100/255.0, alpha: 1.0)
+            timerLabel.text = "Time left: \(String(format: "%.01f", seconds))"
+        }
+    }
+
     // Helper methods
+    
+    func correctAnswer() {
+        nextRound.setBackgroundImage(#imageLiteral(resourceName: "next_round_success"), for: .normal)
+        correctRounds += 1
+    }
+    
+    func wrongAnswer() {
+        nextRound.setBackgroundImage(#imageLiteral(resourceName: "next_round_fail"), for: .normal)
+    }
     
     func hideAllButtons() {
         firstEventBtn.isHidden = true
@@ -300,31 +348,11 @@ class ViewController: UIViewController {
         halfUpBtnSecond.setBackgroundImage(#imageLiteral(resourceName: "up_half"), for: .disabled)
         halfDownBtnSecond.setBackgroundImage(#imageLiteral(resourceName: "down_half"), for: .disabled)
         fullUpBtn.setBackgroundImage(#imageLiteral(resourceName: "up_full"), for: .disabled)
-    }
-    
-    
-    // Timer function
-    var seconds = 0.0
-    var timer = Timer()
-    
-    func startClock() {
-        timerLabel.textColor = UIColor(red: 225/225, green: 225/225, blue: 225/225, alpha: 1.0)
-        seconds = 60.0
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ViewController.subtractTime), userInfo: nil, repeats: true)
-    }
-    
-    @objc func subtractTime() {
-        seconds -= 0.1
-        timerLabel.text = "Time left: \(String(format: "%.01f", seconds))"
         
-        if seconds <= 0.0 {
-            timer.invalidate()
-            timerLabel.text = "Time left: 0.0"
-            checkAnswer()
-        } else if seconds < 5 {
-            timerLabel.textColor = UIColor(red: 239/255.0, green: 130/255.0, blue: 100/255.0, alpha: 1.0)
-            timerLabel.text = "Time left: \(String(format: "%.01f", seconds))"
-        }
+        firstEventBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
+        secondEventBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
+        thirdEventBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
+        fourthEventBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
     }
 }
 
